@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-// TODO: Remove this comment after testing Danger.
+//TODO: Remove this comment after testing Danger.
 struct ContentView: View {
     var body: some View {
         VStack {
