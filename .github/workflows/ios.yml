@@ -32,9 +32,9 @@ jobs:
       #    file_to_build=`echo $file_to_build | awk '{$1=$1;print}'`
       #    xcodebuild build-for-testing -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device"
       - name: Set up Ruby
-        uses: actions/setup-ruby@v1
+        uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.0  # Specify your Ruby version here
+          ruby-version: 3.0  # Specify the available Ruby version
       - name: Install dependencies
         run: |
           gem install bundler
