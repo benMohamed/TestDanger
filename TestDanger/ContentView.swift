@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-//TODO: Remove this comment after testing Danger.
+//TODO : Test todo
 struct ContentView: View {
     var body: some View {
         VStack {
@@ -14,6 +14,7 @@ struct ContentView: View {
                 .imageScale(.large)
                 .foregroundStyle(.tint)
             Text("Hello, world!")
+            let test = print("BMEX")
         }
         .padding()
     }
