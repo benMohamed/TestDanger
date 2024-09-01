@@ -1,0 +1,48 @@
+---
+format_version: '13'
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+project_type: ios
+workflows:
+  Danger:
+    summary: Build your Xcode project.
+    description: The workflow will first clone your Git repository, cache and install
+      your project's dependencies if any and build your project.
+    steps:
+    - git-clone@8: {}
+    - danger@2:
+        inputs:
+        - github_api_token: "$github_api_token"
+    - deploy-to-bitrise-io@2: {}
+  Build:
+    summary: Create an IPA file to install your app on a device or share it with your
+      team.
+    description: The workflow will first clone your Git repository, cache and install
+      your project's dependencies if any, export an IPA file from the project and
+      save it.
+    steps:
+    - git-clone@8: {}
+    - xcode-build-for-simulator@3: {}
+    - deploy-to-bitrise-io@2: {}
+meta:
+  bitrise.io:
+    stack: osx-xcode-15.4.x
+    machine_type_id: g2-m1.4core
+app:
+  envs:
+  - opts:
+      is_expand: false
+    BITRISE_PROJECT_PATH: TestDanger.xcodeproj
+  - opts:
+      is_expand: false
+    BITRISE_SCHEME: TestDanger
+  - opts:
+      is_expand: false
+    BITRISE_DISTRIBUTION_METHOD: ad-hoc
+trigger_map:
+- push_branch: Bitrise
+  enabled: false
+  type: push
+  workflow: Danger
+- pull_request_target_branch: main
+  type: pull_request
+  workflow: Danger
